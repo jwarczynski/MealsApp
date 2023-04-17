@@ -13,21 +13,20 @@ class MainActivity : AppCompatActivity(), RecipeListFragment.Listener {
         setContentView(R.layout.activity_main)
     }
 
-    override fun itemClicked(id: Long) {
+    override fun itemClicked(recipeName: String) {
         val fragmentContainer = findViewById<View>(R.id.fragment_container)
         if (fragmentContainer != null) {
             val details = RecipeDetailFragment()
             val ft = supportFragmentManager.beginTransaction()
-            details.setMeal(id)
+            details.setMeal(recipeName)
             ft.replace(R.id.fragment_container, details)
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             ft.addToBackStack(null)
             ft.commit()
         } else {
             val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra(DetailActivity.EXTRA_RECIPE_ID, id.toInt())
+            intent.putExtra(DetailActivity.EXTRA_RECIPE_NAME, recipeName)
             startActivity(intent)
         }
     }
-
 }
