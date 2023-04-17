@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Picasso
 
 
 class RecipeDetailFragment : Fragment() {
@@ -79,6 +81,7 @@ class RecipeDetailFragment : Fragment() {
 
     private fun showRecipe() {
         val title = view?.findViewById<View>(R.id.textTitle) as TextView
+        val imgRecipe = view?.findViewById<ImageView>(R.id.imgRecipe) as ImageView
         val textViewNumberOfServings = view?.findViewById<View>(R.id.textNumberOfServings) as TextView
         val textViewIngredients = view?.findViewById<View>(R.id.textIngredients) as TextView
         val textViewPreparation = view?.findViewById<View>(R.id.textPreparation) as TextView
@@ -89,5 +92,6 @@ class RecipeDetailFragment : Fragment() {
         textViewExpectedTime.text = recipe?.getExpectedTime()
         textViewIngredients.text = recipe?.getListIngredientsString()
         textViewPreparation.text = recipe?.getPreparation()
+        recipe?.setImageInImageView(imgRecipe)
     }
 }
