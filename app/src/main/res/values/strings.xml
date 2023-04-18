@@ -5,4 +5,14 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="recipe_name"> Nazwa przepisu </string>
     <string name="meal_recipe"> Składniki i sposób przygotowania </string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="reset">Reset</string>
+    <string name="turnoff">Wyłącz</string>
+    <string name="number_servings">Liczba porcji:</string>
+    <string name="time_preparation">Czas przygotowania:</string>
+    <string name="list_ingredients">Lista składników:</string>
+    <string name="preparation">Sposób przygotowania:</string>
+    <string name="timers">Minutniki:</string>
+
 </resources>

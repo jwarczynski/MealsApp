@@ -9,16 +9,17 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.squareup.picasso.Picasso
 
 
 class RecipeDetailFragment : Fragment() {
     // selectedMealName - null jak nie wybrano nazwy posiłku || String z nazwą wybranego posiłku
     private var selectedMealName: String? = null
+    private var selectedNumberOfServings: Int = -1
     private var recipe: Recipe? = null
 
     fun setMeal(mealName: String) {
@@ -29,7 +30,9 @@ class RecipeDetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
         if (savedInstanceState != null) {
             selectedMealName = savedInstanceState.getString("selectedMealName")
+            selectedNumberOfServings = savedInstanceState.getInt("selectedNumberOfServings")
         }
+        onShowRecipeFromFirebase(savedInstanceState == null)
     }
 
     override fun onCreateView(
@@ -52,15 +55,15 @@ class RecipeDetailFragment : Fragment() {
             btnServingsMinus.setOnClickListener {
                 if(recipe?.addNumberOfServings(-1) == true) showRecipe()
             }
-            onShowRecipeFromFirebase()
         }
     }
 
     override fun onSaveInstanceState(savedInstanceState: Bundle) {
         savedInstanceState.putString("selectedMealName", selectedMealName)
+        savedInstanceState.putInt("selectedNumberOfServings", recipe?.getIntNumberOfServings() ?: -1)
     }
 
-    private fun onShowRecipeFromFirebase() {
+    private fun onShowRecipeFromFirebase(instanceIsNull: Boolean) {
         val database = FirebaseDatabase.getInstance("https://put-am-recipe-default-rtdb.firebaseio.com/")
         val myRef = database.getReference("recipes")
         myRef.addValueEventListener(object: ValueEventListener {
@@ -68,6 +71,8 @@ class RecipeDetailFragment : Fragment() {
                 for (recipeFromDb in recipesFromDb.children) {
                     if(selectedMealName == null || recipeFromDb.key.toString() == selectedMealName) {
                         recipe = Recipe(recipeFromDb)
+                        if(instanceIsNull) addTimers(recipe?.getListTimers())
+                        else recipe?.setNumberOfServings(selectedNumberOfServings)
                         break
                     }
                 }
@@ -93,5 +98,19 @@ class RecipeDetailFragment : Fragment() {
         textViewIngredients.text = recipe?.getListIngredientsString()
         textViewPreparation.text = recipe?.getPreparation()
         recipe?.setImageInImageView(imgRecipe)
+    }
+
+    private fun addTimers(listTimers: MutableList<Pair<String, Int>>?) {
+        val ft = childFragmentManager.beginTransaction();
+        if (listTimers != null) {
+            for(timer in listTimers) {
+                val timerFragment = TimerFragment()
+                timerFragment.initTimer(timer.first, timer.second)
+                ft.add(R.id.timer_container, timerFragment);
+            }
+        }
+        ft.addToBackStack(null);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit()
     }
 }

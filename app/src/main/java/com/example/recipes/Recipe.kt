@@ -11,6 +11,10 @@ class Recipe(private val recipeData: DataSnapshot) {
         selectedNumberOfServings = getDefaultNumberOfServings()
     }
 
+    fun setNumberOfServings(numberOfServings: Int) {
+        selectedNumberOfServings = numberOfServings
+    }
+
     fun getName(): String {
         return recipeData.key.toString()
     }
@@ -43,6 +47,10 @@ class Recipe(private val recipeData: DataSnapshot) {
         return selectedNumberOfServings.toString()
     }
 
+    fun getIntNumberOfServings(): Int {
+        return selectedNumberOfServings
+    }
+
     private fun getDefaultNumberOfServings(): Int {
         return recipeData.child("numberOfServings").getValue(Int::class.java) ?: 1
     }
@@ -58,6 +66,17 @@ class Recipe(private val recipeData: DataSnapshot) {
     fun setImageInImageView(imgView: ImageView) {
         val link = recipeData.child("image").value?.toString()
         if (link != null) Picasso.get().load(link).into(imgView)
+    }
+
+    fun getListTimers(): MutableList<Pair<String, Int>> {
+        val listTimers: MutableList<Pair<String, Int>> = mutableListOf()
+        val timers = recipeData.child("timers")
+        for (timer in timers.children) {
+            val name: String = timer.key ?: ""
+            val time: Int = timer.getValue(Int::class.java) ?: 0
+            listTimers.add(Pair(name, time))
+        }
+        return listTimers
     }
 }
 
