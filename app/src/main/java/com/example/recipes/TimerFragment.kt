@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import kotlin.math.log
@@ -20,10 +21,10 @@ class TimerFragment : Fragment(), View.OnClickListener {
     private var running = false
     private var wasRunning = false
     private var name = ""
-    private var btnStart: Button? = null
-    private var btnStop: Button? = null
-    private var btnReset: Button? = null
-    private var btnTurnOff: Button? = null
+    private var btnStart: ImageButton? = null
+    private var btnStop: ImageButton? = null
+    private var btnReset: ImageButton? = null
+    private var btnTurnOff: ImageButton? = null
     private var alertSound: MediaPlayer? = null
 
     fun initTimer(n: String, s: Int) {
@@ -51,10 +52,10 @@ class TimerFragment : Fragment(), View.OnClickListener {
     ): View {
         val layout: View = inflater.inflate(R.layout.fragment_timer, container, false)
         runTimer(layout)
-        btnStart = layout.findViewById<View>(R.id.start_button) as Button
-        btnStop = layout.findViewById<View>(R.id.stop_button) as Button
-        btnReset = layout.findViewById<View>(R.id.reset_button) as Button
-        btnTurnOff = layout.findViewById<View>(R.id.turnoff_button) as Button
+        btnStart = layout.findViewById<View>(R.id.start_button) as ImageButton
+        btnStop = layout.findViewById<View>(R.id.stop_button) as ImageButton
+        btnReset = layout.findViewById<View>(R.id.reset_button) as ImageButton
+        btnTurnOff = layout.findViewById<View>(R.id.turnoff_button) as ImageButton
         btnStart?.setOnClickListener(this)
         btnStop?.setOnClickListener(this)
         btnReset?.setOnClickListener(this)
