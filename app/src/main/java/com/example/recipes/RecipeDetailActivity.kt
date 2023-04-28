@@ -1,10 +1,14 @@
 package com.example.recipes
 
+import android.content.Context
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 
-
-class DetailActivity : AppCompatActivity() {
+class RecipeDetailActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_RECIPE_NAME = "recipeName"
     }
