@@ -10,10 +10,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class RecipeDetailFragment : Fragment() {
@@ -49,11 +51,15 @@ class RecipeDetailFragment : Fragment() {
         if (view != null) {
             val btnServingsPlus = view.findViewById(R.id.btnServingsMore) as Button
             val btnServingsMinus = view.findViewById(R.id.btnServingsLess) as Button
+            val fab = view.findViewById(R.id.fab) as FloatingActionButton
             btnServingsPlus.setOnClickListener {
                 if(recipe?.addNumberOfServings(1) == true) showRecipe()
             }
             btnServingsMinus.setOnClickListener {
                 if(recipe?.addNumberOfServings(-1) == true) showRecipe()
+            }
+            fab.setOnClickListener{
+                Snackbar.make(view, "Kliknięto: 'Udostępnij składniki'", Snackbar.LENGTH_SHORT).show()
             }
         }
     }
