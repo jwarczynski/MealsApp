@@ -57,8 +57,8 @@ private class SectionsPagerAdapter(fm: FragmentManager, private val context: Con
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> return TopFragment()
-            1 -> return Tab1Fragment()
-            2 -> return RecipeListFragment()
+            1 -> return TabFragment(false)
+            2 -> return TabFragment(true)
             else -> TopFragment()
         }
     }
