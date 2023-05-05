@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Recipes</string>
+    <string name="app_name">Przepisolandia</string>
     <string name="detail_button"> Pokaż przepis </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -16,19 +16,11 @@
     <string name="timers">Minutniki:</string>
 
     <string name="title_top">Fragment główny</string>
-    <string-array name="kategoria1">
-        <item>Pozycja 1 Kat. 1</item>
-        <item>Pozycja 2 Kat. 1 </item>
-        <item>Pozycja 3 Kat. 1 </item>
-    </string-array>
-    <string-array name="kategoria2">
-        <item>Kat. 2 Pozycja 1</item>
-        <item>Kat. 2 Pozycja 2</item>
-        <item>Kat. 2 Pozycja 3 </item>
-    </string-array>
 
     <string name="home_tab">Start</string>
-    <string name="kat1_tab">Danie zagraniczne</string>
-    <string name="kat2_tab">Danie polskie</string>
+    <string name="kat1_tab">Polskie</string>
+    <string name="kat2_tab">Zagraniczne</string>
 
-    </resources>
+    <string name="action_title">Action_Activity</string>
+
+</resources>

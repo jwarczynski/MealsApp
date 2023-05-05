@@ -1,6 +1,6 @@
 package com.example.recipes
 
-import android.content.Intent
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +15,12 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class TabFragment(private var category1: Boolean=false) : Fragment() {
+
+    private var listener: TabFragment.Listener? = null
+
+    interface Listener {
+        fun itemClicked(recipeName: String)
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         if (savedInstanceState != null) {
             category1 = savedInstanceState.getBoolean("category1")
@@ -28,6 +34,11 @@ class TabFragment(private var category1: Boolean=false) : Fragment() {
 
     override fun onSaveInstanceState(savedInstanceState: Bundle) {
         savedInstanceState.putBoolean("category1", category1)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = context as TabFragment.Listener
     }
 
     private fun getDataFromFirebaseAndSetAdapter(cocktailRecycler: RecyclerView) {
@@ -46,9 +57,7 @@ class TabFragment(private var category1: Boolean=false) : Fragment() {
                 val adapter = CaptionedImagesAdapter(names, imagesUrl)
                 adapter.setListener(object : CaptionedImagesAdapter.Listener {
                     override fun onClick(name: String) {
-                        val intent = Intent(activity, RecipeDetailActivity::class.java)
-                        intent.putExtra(RecipeDetailActivity.EXTRA_RECIPE_NAME, name)
-                        activity?.startActivity(intent)
+                        listener?.itemClicked(name)
                     }
                 })
                 cocktailRecycler.adapter = adapter

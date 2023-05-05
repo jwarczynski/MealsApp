@@ -91,7 +91,7 @@ class RecipeDetailFragment : Fragment() {
     }
 
     private fun showRecipe() {
-        val title = view?.findViewById<View>(R.id.textTitle) as TextView
+        val title = view?.findViewById<TextView>(R.id.textTitle) as TextView
         val imgRecipe = view?.findViewById<ImageView>(R.id.imgRecipe) as ImageView
         val textViewNumberOfServings = view?.findViewById<View>(R.id.textNumberOfServings) as TextView
         val textViewIngredients = view?.findViewById<View>(R.id.textIngredients) as TextView

@@ -3,7 +3,10 @@ package com.example.recipes
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -14,7 +17,7 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 
 
-class MainActivity : AppCompatActivity(), RecipeListFragment.Listener {
+class MainActivity : AppCompatActivity(), TabFragment.Listener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +50,23 @@ class MainActivity : AppCompatActivity(), RecipeListFragment.Listener {
             startActivity(intent)
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_info -> {
+                val text = "Aplikacja stworzona przez: \n- Patryk Lukaszewski \n- Jędrzej Warczyński"
+                val toast = Toast.makeText(applicationContext, text, Toast.LENGTH_LONG)
+                toast.show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 }
 
 private class SectionsPagerAdapter(fm: FragmentManager, private val context: Context) : FragmentPagerAdapter(fm) {
@@ -57,8 +77,8 @@ private class SectionsPagerAdapter(fm: FragmentManager, private val context: Con
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> return TopFragment()
-            1 -> return TabFragment(false)
-            2 -> return TabFragment(true)
+            1 -> return TabFragment(true)
+            2 -> return TabFragment(false)
             else -> TopFragment()
         }
     }
