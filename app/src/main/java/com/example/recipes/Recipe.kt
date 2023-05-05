@@ -3,6 +3,8 @@ package com.example.recipes
 import android.widget.ImageView
 import com.google.firebase.database.DataSnapshot
 import com.squareup.picasso.Picasso
+import java.lang.Math.round
+import kotlin.math.roundToInt
 
 class Recipe(private val recipeData: DataSnapshot) {
     private var selectedNumberOfServings: Int = 0
@@ -25,11 +27,15 @@ class Recipe(private val recipeData: DataSnapshot) {
         val ingredients = recipeData.child("ingredients")
         for (ingredient in ingredients.children) {
             val name = ingredient.key ?: ""
-            val number =
-                (ingredient.child("number").getValue(Int::class.java)?.times(scale))?.toInt()
-                    .toString() ?: ""
+//            val number3 = ((()?.times(
+//                100
+//            )) / 100).toString()
+            var number = ingredient.child("number").getValue(Float::class.java)?.times(scale)
+            var number2  = round(number?.times(100) ?: 0f) / 100f
+
             val unit = ingredient.child("unit").value?.toString() ?: ""
-            text += " - $name \t- $number $unit\n"
+            if(number == number2.roundToInt().toFloat()) text += " - $name \t- ${number2.toInt().toString()} $unit\n"
+            else text += " - $name \t- ${number2.toString()} $unit\n"
         }
         return text
     }
