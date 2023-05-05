@@ -49,7 +49,7 @@
                 android:backgroundTint="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:visibility="visible"
-                app:srcCompat="@drawable/play_button" />
+                app:srcCompat="@drawable/outline_play_arrow_black_24" />
 
             <ImageButton
                 android:id="@+id/stop_button"
@@ -61,7 +61,7 @@
                 android:backgroundTint="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:visibility="gone"
-                app:srcCompat="@drawable/stop_button" />
+                app:srcCompat="@drawable/outline_pause_black_24" />
 
             <ImageButton
                 android:id="@+id/reset_button"
@@ -73,7 +73,7 @@
                 android:backgroundTint="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:visibility="gone"
-                app:srcCompat="@drawable/reset_button" />
+                app:srcCompat="@drawable/outline_restart_alt_24" />
 
             <ImageButton
                 android:id="@+id/turnoff_button"
@@ -85,7 +85,7 @@
                 android:backgroundTint="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:visibility="gone"
-                app:srcCompat="@drawable/turnoff_button" />
+                app:srcCompat="@drawable/outline_alarm_off_black_24" />
 
         </LinearLayout>
 
