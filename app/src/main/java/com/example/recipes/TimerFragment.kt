@@ -70,6 +70,7 @@ class TimerFragment : Fragment(), View.OnClickListener {
 
     override fun onPause() {
         super.onPause()
+        alertSound?.stop()
         wasRunning = running
         running = false
         setBtnVisibility(showBtnStart =  true, showBtnReset =  wasRunning)
