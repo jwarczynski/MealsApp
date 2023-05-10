@@ -1,5 +1,7 @@
 package com.example.recipes
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.media.MediaPlayer
 import android.media.PlaybackParams
 import android.os.Bundle
@@ -10,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import kotlin.math.log
 import kotlin.math.log10
@@ -117,6 +120,7 @@ class TimerFragment : Fragment(), View.OnClickListener {
         running = false
         seconds = secondsStart
         alertSound?.stop()
+        getAnimation(false).start()
         setBtnVisibility(showBtnStart = true)
     }
 
@@ -127,7 +131,7 @@ class TimerFragment : Fragment(), View.OnClickListener {
             override fun run() {
                 if(running) seconds--
                 if(seconds > 0) setTimeInTimeView(timeView, seconds)
-                else setTimeInTimeView(timeView, 0)
+                else setTimeInTimeView(timeView, seconds)
 
                 if(running && seconds <= 0) {
                     if(seconds == 0) {
@@ -144,6 +148,8 @@ class TimerFragment : Fragment(), View.OnClickListener {
                         if(volume < 0.05F) volume = 0.05F
                         alertSound?.playbackParams = PlaybackParams().setSpeed(speed)
                         alertSound?.setVolume(volume, volume)
+
+                        if((-seconds) % 2 == 0) getAnimationScale().start()
                     }
                 }
                 handler.postDelayed(this, 1000)
@@ -177,13 +183,48 @@ class TimerFragment : Fragment(), View.OnClickListener {
         alertSound?.isLooping = true
         alertSound?.setVolume(0.05F, 0.05F)
         alertSound?.start()
+        getAnimation(true).start()
     }
 
-    private fun setTimeInTimeView(timeView: TextView, seconds: Int) {
+    private fun getAnimation(finish: Boolean): AnimatorSet {
+        val timeView = requireView().findViewById<TextView>(R.id.time_view)
+        val colorNormal = resources.getColor(R.color.timer_normal)
+        val colorAlarm = resources.getColor(R.color.timer_alarm)
+        val vC = if(finish) arrayListOf(colorNormal, colorAlarm) else arrayListOf(colorAlarm, colorNormal)
+        val colorAnimation = ObjectAnimator.ofArgb(timeView, "textColor", vC[0], vC[1]).setDuration(1000)
+        val animationSet = AnimatorSet()
+        if(!finish) {
+            animationSet.play(colorAnimation)
+            return animationSet
+        }
+        animationSet.play(colorAnimation).with(getAnimationScale())
+        return animationSet
+    }
+
+    private fun getAnimationScale(): AnimatorSet {
+        val timeView = requireView().findViewById<TextView>(R.id.time_view)
+        val vS = arrayListOf(1f, 0.75f)
+        val scaleXAnimation1 = ObjectAnimator.ofFloat(timeView, "scaleX", vS[0], vS[1]).setDuration(500)
+        val scaleYAnimation1 = ObjectAnimator.ofFloat(timeView, "scaleY", vS[0], vS[1]).setDuration(500)
+        val scaleXAnimation2 = ObjectAnimator.ofFloat(timeView, "scaleX", vS[1], vS[0]).setDuration(500)
+        val scaleYAnimation2 = ObjectAnimator.ofFloat(timeView, "scaleY", vS[1], vS[0]).setDuration(500)
+        val animationSet = AnimatorSet()
+        animationSet.play(scaleXAnimation1).with(scaleYAnimation1).before(scaleXAnimation2).before(scaleYAnimation2)
+        return animationSet
+    }
+
+    private fun setTimeInTimeView(timeView: TextView, sec: Int) {
+        var seconds = sec
+        var sign = " "
+        if(seconds < 0) {
+            sign = "-"
+            seconds *= -1
+        }
         val hours = seconds / 3600
         val minutes = seconds % 3600 / 60
         val secs = seconds % 60
         val time = String.format("%d:%02d:%02d", hours, minutes, secs)
-        timeView.text = time
+        val txt = "$sign $time"
+        timeView.text = txt
     }
 }
