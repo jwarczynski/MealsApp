@@ -30,6 +30,8 @@ class RecipeDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        println("onCreate")
+
         if (savedInstanceState != null) {
             selectedMealName = savedInstanceState.getString("selectedMealName")
             selectedNumberOfServings = savedInstanceState.getInt("selectedNumberOfServings")
@@ -46,6 +48,7 @@ class RecipeDetailFragment : Fragment() {
     }
 
     override fun onStart() {
+        println("onStart")
         super.onStart()
         val view = view
         if (view != null) {
@@ -91,13 +94,14 @@ class RecipeDetailFragment : Fragment() {
     }
 
     private fun showRecipe() {
+        println(recipe?.getName().toString())
         val title = view?.findViewById<TextView>(R.id.textTitle) as TextView
         val imgRecipe = view?.findViewById<ImageView>(R.id.imgRecipe) as ImageView
         val textViewNumberOfServings = view?.findViewById<View>(R.id.textNumberOfServings) as TextView
         val textViewIngredients = view?.findViewById<View>(R.id.textIngredients) as TextView
         val textViewPreparation = view?.findViewById<View>(R.id.textPreparation) as TextView
         val textViewExpectedTime = view?.findViewById<View>(R.id.textExpectedTime) as TextView
-
+        println(title.toString() + " : " + recipe?.getName().toString())
         title.text = recipe?.getName()
         textViewNumberOfServings.text = recipe?.getNumberOfServings()
         textViewExpectedTime.text = recipe?.getExpectedTime()
@@ -118,5 +122,20 @@ class RecipeDetailFragment : Fragment() {
         ft.addToBackStack(null);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        println("Pause")
+    }
+
+    override fun onDestroy() {
+        println("onDestroy")
+        super.onDestroy()
+    }
+
+    override fun onDetach() {
+        println("onDetach")
+        super.onDetach()
     }
 }

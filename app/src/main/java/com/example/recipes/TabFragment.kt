@@ -27,8 +27,9 @@ class TabFragment(private var category1: Boolean=false) : Fragment() {
         }
         val cocktailRecycler = inflater.inflate(R.layout.fragment_tab, container, false) as RecyclerView
         val layoutManager = GridLayoutManager(context, 2)
-        getDataFromFirebaseAndSetAdapter(cocktailRecycler)
         cocktailRecycler.layoutManager = layoutManager
+        cocktailRecycler.adapter = CaptionedImagesAdapter(mutableListOf<String>("A"), mutableListOf<String?>(null))
+        getDataFromFirebaseAndSetAdapter(cocktailRecycler)
         return cocktailRecycler
     }
 
@@ -44,8 +45,10 @@ class TabFragment(private var category1: Boolean=false) : Fragment() {
     private fun getDataFromFirebaseAndSetAdapter(cocktailRecycler: RecyclerView) {
         val database = FirebaseDatabase.getInstance("https://put-am-recipe-default-rtdb.firebaseio.com/")
         val myRef = database.getReference("recipes")
+        println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
         myRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                println("Są dane")
                 val names = mutableListOf<String>()
                 val imagesUrl = mutableListOf<String?>()
                 for (c in snapshot.children) {

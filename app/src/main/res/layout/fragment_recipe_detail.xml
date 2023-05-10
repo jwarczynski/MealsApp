@@ -12,7 +12,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" >
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:layout_scrollFlags="scroll"
             app:contentScrim="?attr/colorPrimary"
             android:layout_height="match_parent"
             android:layout_width="match_parent">

@@ -37,6 +37,10 @@ class MainActivity : AppCompatActivity(), TabFragment.Listener {
     override fun itemClicked(recipeName: String) {
         val fragmentContainer = findViewById<View>(R.id.fragment_container)
         if (fragmentContainer != null) {
+//            val oldFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+//            if (oldFragment != null) {
+//                supportFragmentManager.beginTransaction().remove(oldFragment).commit()
+//            }
             val details = RecipeDetailFragment()
             val ft = supportFragmentManager.beginTransaction()
             details.setMeal(recipeName)

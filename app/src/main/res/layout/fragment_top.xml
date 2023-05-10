@@ -25,7 +25,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="25dp"
         android:layout_marginRight="25dp"
-        android:text="Aplikacja zawiera przepisy zarówno polskie, jak i zagraniczne przepisy kulinarne."
+        android:text="Aplikacja zawiera\npolskie oraz zagraniczne\nprzepisy kulinarne"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
         android:textSize="20sp" />
@@ -39,5 +39,12 @@
         android:layout_marginRight="25dp"
         android:text="Aplikacja stworzone przez:\n   - Patryka Lukaszewskiego\n   - Jędrzeja Warczyńskiego"
         android:textAlignment="center" />
+
+    <ImageView
+        android:id="@+id/imgPizza"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="40"
+        android:src="@drawable/pizza" />
 
 </LinearLayout>
