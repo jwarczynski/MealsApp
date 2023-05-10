@@ -37,10 +37,6 @@ class MainActivity : AppCompatActivity(), TabFragment.Listener {
     override fun itemClicked(recipeName: String) {
         val fragmentContainer = findViewById<View>(R.id.fragment_container)
         if (fragmentContainer != null) {
-//            val oldFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
-//            if (oldFragment != null) {
-//                supportFragmentManager.beginTransaction().remove(oldFragment).commit()
-//            }
             val details = RecipeDetailFragment()
             val ft = supportFragmentManager.beginTransaction()
             details.setMeal(recipeName)
@@ -87,7 +83,6 @@ private class SectionsPagerAdapter(fm: FragmentManager, private val context: Con
         }
     }
 
-
     override fun getPageTitle(position: Int): CharSequence? {
         when (position) {
             0 -> return context.resources.getText(R.string.home_tab)
@@ -96,5 +91,4 @@ private class SectionsPagerAdapter(fm: FragmentManager, private val context: Con
         }
         return null
     }
-
 }

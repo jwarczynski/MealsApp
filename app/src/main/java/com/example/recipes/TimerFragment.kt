@@ -4,6 +4,7 @@ import android.media.MediaPlayer
 import android.media.PlaybackParams
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,13 +35,13 @@ class TimerFragment : Fragment(), View.OnClickListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState)
         if (savedInstanceState != null) {
-            secondsStart = savedInstanceState.getInt("secondsStart");
-            seconds = savedInstanceState.getInt("seconds");
-            running = savedInstanceState.getBoolean("running");
-            wasRunning = savedInstanceState.getBoolean("wasRunning");
-            name = savedInstanceState.getString("name").toString();
+            secondsStart = savedInstanceState.getInt("secondsStart")
+            seconds = savedInstanceState.getInt("seconds")
+            running = savedInstanceState.getBoolean("running")
+            wasRunning = savedInstanceState.getBoolean("wasRunning")
+            name = savedInstanceState.getString("name").toString()
         }
     }
 
@@ -121,7 +122,7 @@ class TimerFragment : Fragment(), View.OnClickListener {
 
     private fun runTimer(view: View) {
         val timeView = view.findViewById<View>(R.id.time_view) as TextView
-        val handler = Handler()
+        val handler = Handler(Looper.getMainLooper())
         handler.post(object : Runnable {
             override fun run() {
                 if(running) seconds--
