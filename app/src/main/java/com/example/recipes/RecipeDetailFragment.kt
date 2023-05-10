@@ -30,13 +30,10 @@ class RecipeDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        println("onCreate")
-
         if (savedInstanceState != null) {
             selectedMealName = savedInstanceState.getString("selectedMealName")
             selectedNumberOfServings = savedInstanceState.getInt("selectedNumberOfServings")
         }
-        onShowRecipeFromFirebase(savedInstanceState == null)
     }
 
     override fun onCreateView(
@@ -44,11 +41,11 @@ class RecipeDetailFragment : Fragment() {
         container: ViewGroup?,
         savedinstanceState: Bundle?
     ): View? {
+        onShowRecipeFromFirebase(savedinstanceState == null)
         return inflater.inflate(R.layout.fragment_recipe_detail, container, false)
     }
 
     override fun onStart() {
-        println("onStart")
         super.onStart()
         val view = view
         if (view != null) {
@@ -122,20 +119,5 @@ class RecipeDetailFragment : Fragment() {
         ft.addToBackStack(null);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        println("Pause")
-    }
-
-    override fun onDestroy() {
-        println("onDestroy")
-        super.onDestroy()
-    }
-
-    override fun onDetach() {
-        println("onDetach")
-        super.onDetach()
     }
 }

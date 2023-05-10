@@ -16,7 +16,7 @@ import com.google.firebase.database.ValueEventListener
 
 class TabFragment(private var category1: Boolean=false) : Fragment() {
 
-    private var listener: TabFragment.Listener? = null
+    private var listener: Listener? = null
 
     interface Listener {
         fun itemClicked(recipeName: String)
@@ -28,7 +28,7 @@ class TabFragment(private var category1: Boolean=false) : Fragment() {
         val cocktailRecycler = inflater.inflate(R.layout.fragment_tab, container, false) as RecyclerView
         val layoutManager = GridLayoutManager(context, 2)
         cocktailRecycler.layoutManager = layoutManager
-        cocktailRecycler.adapter = CaptionedImagesAdapter(mutableListOf<String>("A"), mutableListOf<String?>(null))
+        cocktailRecycler.adapter = CaptionedImagesAdapter(mutableListOf(), mutableListOf())
         getDataFromFirebaseAndSetAdapter(cocktailRecycler)
         return cocktailRecycler
     }
@@ -39,16 +39,14 @@ class TabFragment(private var category1: Boolean=false) : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        listener = context as TabFragment.Listener
+        listener = context as Listener
     }
 
     private fun getDataFromFirebaseAndSetAdapter(cocktailRecycler: RecyclerView) {
         val database = FirebaseDatabase.getInstance("https://put-am-recipe-default-rtdb.firebaseio.com/")
         val myRef = database.getReference("recipes")
-        println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
         myRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                println("Są dane")
                 val names = mutableListOf<String>()
                 val imagesUrl = mutableListOf<String?>()
                 for (c in snapshot.children) {

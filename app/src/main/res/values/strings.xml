@@ -23,4 +23,7 @@
 
     <string name="action_title">Action_Activity</string>
 
+    <string name="top_first_paragraph">Aplikacja zawiera\npolskie oraz zagraniczne\nprzepisy kulinarne"</string>
+    <string name="top_second_paragraph">Aplikacja stworzone przez:\n   - Patryka Lukaszewskiego\n   - Jędrzeja Warczyńskiego</string>
+    <string name="top_imgPizza">Pizza</string>
 </resources>
