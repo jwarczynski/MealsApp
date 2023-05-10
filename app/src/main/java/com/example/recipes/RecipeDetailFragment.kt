@@ -91,14 +91,12 @@ class RecipeDetailFragment : Fragment() {
     }
 
     private fun showRecipe() {
-        println(recipe?.getName().toString())
-        val title = view?.findViewById<TextView>(R.id.textTitle) as TextView
-        val imgRecipe = view?.findViewById<ImageView>(R.id.imgRecipe) as ImageView
+        val title = view?.findViewById(R.id.textTitle) as TextView
+        val imgRecipe = view?.findViewById(R.id.imgRecipe) as ImageView
         val textViewNumberOfServings = view?.findViewById<View>(R.id.textNumberOfServings) as TextView
         val textViewIngredients = view?.findViewById<View>(R.id.textIngredients) as TextView
         val textViewPreparation = view?.findViewById<View>(R.id.textPreparation) as TextView
         val textViewExpectedTime = view?.findViewById<View>(R.id.textExpectedTime) as TextView
-        println(title.toString() + " : " + recipe?.getName().toString())
         title.text = recipe?.getName()
         textViewNumberOfServings.text = recipe?.getNumberOfServings()
         textViewExpectedTime.text = recipe?.getExpectedTime()
@@ -108,16 +106,16 @@ class RecipeDetailFragment : Fragment() {
     }
 
     private fun addTimers(listTimers: MutableList<Pair<String, Int>>?) {
-        val ft = childFragmentManager.beginTransaction();
+        val ft = childFragmentManager.beginTransaction()
         if (listTimers != null) {
             for(timer in listTimers) {
                 val timerFragment = TimerFragment()
                 timerFragment.initTimer(timer.first, timer.second)
-                ft.add(R.id.timer_container, timerFragment);
+                ft.add(R.id.timer_container, timerFragment)
             }
         }
-        ft.addToBackStack(null);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.addToBackStack(null)
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         ft.commit()
     }
 }

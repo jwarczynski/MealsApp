@@ -9,10 +9,10 @@
     <TextView
         android:id="@+id/textTimerName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="TextView"
+        android:text=""
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -28,9 +28,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:text="0:00:00"
+            android:text="@string/defaultTime"
             android:textAppearance="@android:style/TextAppearance.Large"
-            android:textSize="33dp" />
+            android:textSize="33sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -48,7 +48,8 @@
                 android:backgroundTint="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:visibility="visible"
-                app:srcCompat="@drawable/outline_play_arrow_black_24" />
+                app:srcCompat="@drawable/outline_play_arrow_black_24"
+                android:contentDescription="@string/btnTimerStart" />
 
             <ImageButton
                 android:id="@+id/stop_button"
@@ -60,7 +61,8 @@
                 android:backgroundTint="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:visibility="gone"
-                app:srcCompat="@drawable/outline_pause_black_24" />
+                app:srcCompat="@drawable/outline_pause_black_24"
+                android:contentDescription="@string/btnTimerPause" />
 
             <ImageButton
                 android:id="@+id/reset_button"
@@ -72,7 +74,8 @@
                 android:backgroundTint="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:visibility="gone"
-                app:srcCompat="@drawable/outline_restart_alt_black_24" />
+                app:srcCompat="@drawable/outline_restart_alt_black_24"
+                android:contentDescription="@string/btnTimerRestart" />
 
             <ImageButton
                 android:id="@+id/turnoff_button"
@@ -84,7 +87,8 @@
                 android:backgroundTint="#FFFFFF"
                 android:scaleType="fitCenter"
                 android:visibility="gone"
-                app:srcCompat="@drawable/outline_alarm_off_black_24" />
+                app:srcCompat="@drawable/outline_alarm_off_black_24"
+                android:contentDescription="@string/btnTimerAlarmTurnoff" />
 
         </LinearLayout>
 

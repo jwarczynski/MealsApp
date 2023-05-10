@@ -26,4 +26,16 @@
     <string name="top_first_paragraph">Aplikacja zawiera\npolskie oraz zagraniczne\nprzepisy kulinarne"</string>
     <string name="top_second_paragraph">Aplikacja stworzone przez:\n   - Patryka Lukaszewskiego\n   - Jędrzeja Warczyńskiego</string>
     <string name="top_imgPizza">Pizza</string>
+
+    <string name="recipe_image">Zdjęcie potrawy</string>
+    <string name="signServingsLess">-</string>
+    <string name="signServingsMore">+</string>
+    <string name="numberServings">0</string>
+    <string name="textPreparation">Przygotowanie</string>
+    <string name="fab">FAB</string>
+    <string name="defaultTime">0:00:00</string>
+    <string name="btnTimerStart">Start</string>
+    <string name="btnTimerPause">Pause</string>
+    <string name="btnTimerRestart">Restart</string>
+    <string name="btnTimerAlarmTurnoff">Alarm off</string>
 </resources>
